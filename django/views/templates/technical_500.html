@@ -61,6 +61,7 @@
     span.commands a:link {color:#5E5694;}
     pre.exception_value { font-family: sans-serif; color: #575757; font-size: 1.5em; margin: 10px 0 10px 0; }
     .append-bottom { margin-bottom: 10px; }
+    .search-500 { margin-bottom: 10px; }
   </style>
   {% if not is_email %}
   <script type="text/javascript">
@@ -107,6 +108,9 @@
   <h1>{% if exception_type %}{{ exception_type }}{% else %}Report{% endif %}
       {% if request %} at {{ request.path_info }}{% endif %}</h1>
   <pre class="exception_value">{% if exception_value %}{{ exception_value|force_escape }}{% else %}No exception message supplied{% endif %}</pre>
+  <p class="search-500"><a target="_blank" href="{{settings.SEARCH_URL_500|default:'https://stackoverflow.com/search?q='}}{% if exception_type %}{{ exception_type }} {% endif %}{% if exception_value %}{{ exception_value|force_escape }}{% endif %}" title="set SEARCH_URL_500 in the django settings to specify a different search engine url prefix">
+    {%if settings.SEARCH_URL_500 %}Search the web{% else %}Search on stackoverflow{% endif %}
+  </a></p>
   <table class="meta">
 {% if request %}
     <tr>
